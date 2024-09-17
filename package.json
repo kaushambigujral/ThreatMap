@@ -1,0 +1,22 @@
+{
+  "name": "threatmap",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Kaushambi Gujral",
+  "license": "ISC",
+  "description": "POC for Hackathon: ThreatMap by Team 0xDEADBEEF",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "pug": "^3.0.3",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

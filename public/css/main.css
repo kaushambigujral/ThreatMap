@@ -1,0 +1,58 @@
+:root {
+    --red: rgb(238, 49, 36);
+    --darkBackground: rgb(50,50,50);
+    --lightGrey: rgb(230, 236, 240);
+}
+
+body {
+    background-color: var(--darkBackground);
+    min-height: 100vh;
+    border-top: 1rem solid var(--red);
+    color: var(--lightGrey);
+}
+
+.wrapper-v {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper-h{
+    display: flex;
+    flex-direction: row;
+}
+
+.header-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.eroad-logo > a > img{
+    padding: 1rem;
+    height: 5.5rem;
+}
+
+.red-text{
+    color: var(--red);
+}
+
+#page-content{
+    padding: 1rem;
+}
+
+.attacksContainer, .topAttackingAreas{
+    flex: 1;
+}
+
+.mapContainer {
+    flex: 3;
+}
+
+#map {
+    display: block;
+    width: 95%;
+    margin-bottom: 3px;
+    height: 450px;
+    background: grey;
+}
