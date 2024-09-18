@@ -8,6 +8,7 @@ var platform = new H.service.Platform({
 // create map
 var engineType = H.Map.EngineType['HARP'];
 var style = new H.map.render.harp.Style(mapStyle);
+const defaultLayers = platform.createDefaultLayers({ engineType });
 var vectorLayer = platform.getOMVService().createLayer(style, { engineType });
 var map = new H.Map(document.getElementById('map'),
   vectorLayer, {
@@ -19,11 +20,29 @@ var map = new H.Map(document.getElementById('map'),
 window.addEventListener('resize', () => map.getViewPort().resize());
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
-// // bubble function
-//const ui = H.ui.UI.createDefault(map, vectorLayer);
+var ui = H.ui.UI.createDefault(map, defaultLayers);
+// bubble function
+// var infoBubble = new H.ui.InfoBubble({
+//   content: '<div style="width: 200px; height: 150px; background-color: #fff; padding: 10px;">' +
+//       '<h2>Card Title</h2>' +
+//       '<p>Card content goes here.</p>' +
+//       '</div>'
+// });
+
 var bubble;
 const openBubble = (position, text) => {
   console.log("Open Bubble!!!");
+  if (!bubble) {
+    bubble = new H.ui.InfoBubble(
+      position, {
+        content: text
+      });
+    ui.addBubble(bubble);
+  } else {
+    bubble.setPosition(position);
+    bubble.setContent(text);
+    bubble.open();
+  }
  }
 
 
