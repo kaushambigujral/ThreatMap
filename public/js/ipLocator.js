@@ -1,14 +1,23 @@
+// Globals
+var locations = [];
 const urlPrefix = "http://ip-api.com/json/";
 
 const locateIP = (ipAddress) => {
-    var location = [0, 0];
+    var location = {};
+    location.position = {};
+    location.position.lat = 0;
+    location.position.lng = 0;
+    location.label = "";
     $.get(`${urlPrefix}${ipAddress}`, (data, status) => {
         if(status == "success"){
-            location[0] = data.lat;
-            location[1] = data.lon;
+            console.log(data);
+            location.position.lat = data.lat;
+            location.position.lng = data.lon;
+            location.label = `${data.city}, ${data.region}, ${data.country}`;
         }
     })
     .then(()=> {
-        console.log(location);
+        locations.push(location);
+        addLocationsToMap(locations);
     });
 }
