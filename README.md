@@ -6,5 +6,9 @@ Expiration: Oct 17, 2024 4:28 PM
 install node, npm: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
 ## How to run
+all secrets will be stored in environment variables.
+Create a `.env` file with contents: 
+API_KEY = "<your-api-key>"
+
 `npm i`
 `npm run dev`
