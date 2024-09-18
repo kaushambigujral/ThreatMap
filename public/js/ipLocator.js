@@ -2,6 +2,11 @@
 var locations = [];
 const urlPrefix = "http://ip-api.com/json/";
 
+const locateIPList = (ipAddressList) => {
+    ipAddressList.forEach(ip => {
+        locateIP(ip);
+    });
+}
 const locateIP = (ipAddress) => {
     var location = {};
     location.position = {};
@@ -10,7 +15,7 @@ const locateIP = (ipAddress) => {
     location.label = "";
     $.get(`${urlPrefix}${ipAddress}`, (data, status) => {
         if(status == "success"){
-            console.log(data);
+            //console.log(data);
             location.position.lat = data.lat;
             location.position.lng = data.lon;
             location.label = `${data.city}, ${data.region}, ${data.country}`;

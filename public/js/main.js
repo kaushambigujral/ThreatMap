@@ -21,17 +21,10 @@ window.addEventListener('resize', () => map.getViewPort().resize());
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
 var ui = H.ui.UI.createDefault(map, defaultLayers);
-// bubble function
-// var infoBubble = new H.ui.InfoBubble({
-//   content: '<div style="width: 200px; height: 150px; background-color: #fff; padding: 10px;">' +
-//       '<h2>Card Title</h2>' +
-//       '<p>Card content goes here.</p>' +
-//       '</div>'
-// });
 
+// bubble function
 var bubble;
 const openBubble = (position, text) => {
-  console.log("Open Bubble!!!");
   if (!bubble) {
     bubble = new H.ui.InfoBubble(
       position, {
@@ -52,28 +45,25 @@ const addLocationsToMap = (locations) => {
       i;
 
   // Add a marker for each location found
+  var iconFileName = './images/locationPin-Red.svg';
   for (i = 0;  i < locations.length; i += 1) {
     let location = locations[i];
     marker = new H.map.Marker(location.position);
     marker.label = location.label;
-    //marker.icon = new H.map.Icon('/images/locationPin.svg'); //custom icon
-    group.addObject(marker);
+    var icon = new H.map.Icon(iconFileName);
+	  marker.setIcon(icon);
+
+    map.addObject(marker);
+    marker.addEventListener('pointerenter', function(ev) {
+      openBubble(ev.target.getGeometry(), ev.target.label);
+    }, false);
   }
 
-  
-  group.addEventListener('tap', function (evt) {
-    openBubble(evt.target.getGeometry(), evt.target.label);
-  }, false);
-
-  // Add the locations group to the map
   map.addObject(group);
-}
-const logEvent = () => {
-  console.log("Event");
 }
 
 window.onload = function() {
     initMap(map);
-    locateIP("76.33.11.2");
+    locateIPList(["76.33.11.2", "72.167.172.60", "52.103.200.17"]);
 }
   
