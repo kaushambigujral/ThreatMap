@@ -5,21 +5,24 @@ function initMap(map) {
 var platform = new H.service.Platform({
   apikey: JSON.parse(document.querySelector('#api-key').value).apiKey //pulling it from env
 });
+
+var engineType = H.Map.EngineType['HARP'];
+var style = new H.map.render.harp.Style('https://heremaps.github.io/maps-api-for-javascript-examples/change-harp-style-at-load/data/night.json');
+var vectorLayer = platform.getOMVService().createLayer(style, { engineType });
+
 var defaultLayers = platform.createDefaultLayers();
   
 var map = new H.Map(document.getElementById('map'),
-  defaultLayers.vector.normal.map, {
-    center: {
-      lat: 50,
-      lng: 5
-    },
-    zoom: 4,
-    pixelRatio: window.devicePixelRatio || 1
-  });
+  vectorLayer, {
+  engineType,
+  center: {lat: 52.51477270923461, lng: 13.39846691425174},
+  zoom: 13,
+  pixelRatio: window.devicePixelRatio || 1
+});
+
 window.addEventListener('resize', () => map.getViewPort().resize());
   
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-var ui = H.ui.UI.createDefault(map, defaultLayers);
   
 window.onload = function() {
     initMap(map);
