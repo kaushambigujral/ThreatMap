@@ -1,3 +1,6 @@
+// Globals
+var allLocations = [];
+
 const mapStyle = "https://heremaps.github.io/maps-api-for-javascript-examples/change-harp-style-at-load/data/night.json";
 const initMap = (map) => map.setZoom(1.5)
 
@@ -40,14 +43,15 @@ const openBubble = (position, text) => {
 
 
 const addLocationsToMap = (locations) => {
+  allLocations = allLocations.concat(locations);
   var group = new  H.map.Group(),
       position,
       i;
 
   // Add a marker for each location found
-  var iconFileName = './images/locationPin-Red.svg';
-  for (i = 0;  i < locations.length; i += 1) {
-    let location = locations[i];
+  for (i = 0;  i < allLocations.length; i += 1) {
+    let location = allLocations[i];
+    var iconFileName = getSVG(location.event_category);
     marker = new H.map.Marker(location.position);
     marker.label = location.label;
     var icon = new H.map.Icon(iconFileName);
@@ -60,10 +64,24 @@ const addLocationsToMap = (locations) => {
   }
 
   map.addObject(group);
+  updateAttackCounter(allLocations.length);
+}
+
+const getSVG = (category) => {
+  if(category == "Phishing") return './images/locationPin-Red.svg';
+  if(category == "Phishing Report") return './images/locationPin-Green.svg';
+  if(category == "SuccessfulLogon") return './images/locationPin-Yellow.svg';
+  if(category == "LogonFailed") return './images/locationPin-Orange.svg';
+  if(category == "Heavy Ingress Traffic") return './images/locationPin-Purple.svg';
+  if(category == "Scan Attempts") return './images/locationPin-Aqua.svg';
 }
 
 window.onload = function() {
     initMap(map);
-    locateIPList(["76.33.11.2", "72.167.172.60", "52.103.200.17"]);
+    //locateIPList(["76.33.11.2", "72.167.172.60", "52.103.200.17"]);
+}
+
+const updateAttackCounter = (val)=> {
+  $(".daily-attacks > span").text(val + " ");
 }
   

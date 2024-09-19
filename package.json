@@ -2,6 +2,7 @@
   "name": "threatmap",
   "version": "1.0.0",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
@@ -11,10 +12,12 @@
   "license": "ISC",
   "description": "POC for Hackathon: ThreatMap by Team 0xDEADBEEF",
   "dependencies": {
+    "@azure/service-bus": "^7.9.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "pug": "^3.0.3",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^4.7.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
