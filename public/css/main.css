@@ -56,3 +56,35 @@ body {
     height: 450px;
     background: grey;
 }
+
+.phishing{
+    background-color: red;
+}
+.phishing-report{
+    background-color: green;
+}
+.successful-logon{
+    background-color: yellow;
+}
+.logon-failed{
+    background-color: orange;
+}
+.heavy-ingress-traffic{
+    background-color: #bd3bfc;
+}
+.scan-attempts{
+    background-color: #1ff9f9;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 10px;
+  }
+.ac{
+    align-items: center;
+}
+.legend-container{
+    justify-content: center;
+}
